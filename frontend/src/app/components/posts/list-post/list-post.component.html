@@ -1,5 +1,8 @@
 <div class="px-5 mt-5">
   <h2>Publicaciones recientes</h2>
+  <br />
+  <br />
+
   @if (postsList$ | async; as resultObject) {
     <div class="w-full">
       @for (item of postsList$ | async; track item.id) {
@@ -12,4 +15,5 @@
       }
     </div>
   }
+
 </div>

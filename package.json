@@ -19,7 +19,11 @@
     "test:watch": "jest --watch",
     "test:cov": "jest --coverage",
     "test:debug": "node --inspect-brk -r tsconfig-paths/register -r ts-node/register node_modules/.bin/jest --runInBand",
-    "test:e2e": "jest --config ./test/jest-e2e.json"
+    "test:e2e": "jest --config ./test/jest-e2e.json",
+    "server-install": "npm install",
+    "client-install": "cd frontend && npm install",
+    "install-all": "concurrently \" npm run server-install \" \" npm run client-install \"",
+    "postbuild": "cd frontend && npm install && npm run build"
   },
   "dependencies": {
     "@nestjs/common": "^10.0.0",

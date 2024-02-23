@@ -12,8 +12,7 @@ export class AuthGuardOff implements CanActivate {
   ) {}
 
   canActivate(): boolean {
-    const storage = this.storageService.getUser();
-    const token = storage?.token ?? null;
+    const token = this.storageService.getToken();
     if (token) {
       this.router.navigate(['/feed']);
     }

@@ -11,10 +11,16 @@ import { StorageService } from '../../core/services/storage.service';
   providers: [StorageService, AuthService],
 })
 export class HeaderComponent {
+  isLoggedIn: boolean = false;
+
   constructor(
     private authService: AuthService,
     private storageService: StorageService,
   ) {}
+
+  ngOnInit() {
+    this.isLoggedIn = this.storageService.isLoggedIn();
+  }
 
   logout(): void {
     this.authService.logout().subscribe({

@@ -29,4 +29,3 @@ export class PostService {
     return this.http.get(`${AUTH_API}?take=${take}&skip=${skip}`);
   }
 }
-//?take=10&skip=0
