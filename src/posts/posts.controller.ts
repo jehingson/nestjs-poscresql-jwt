@@ -26,8 +26,7 @@ export class PostsController {
   }
 
   @Get()
-  findAll(@Query('take') take: number = 1, @Query('skip') skip: number = 1) {
-    take = take > 20 ? 20 : take;
+  findAll(@Query('take') take: number = 10, @Query('skip') skip: number = 0) {
     return this.postsService.findAll(take, skip);
   }
 

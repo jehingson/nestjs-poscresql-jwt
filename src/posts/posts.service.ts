@@ -19,8 +19,17 @@ export class PostsService {
     });
   }
 
-  findAll(take: number = 10, skip: number = 0) {
-    return this.postsRepository.find({ take, skip });
+  async findAll(take: number = 10, skip: number = 0) {
+    const keyword = '';
+    const queryBuilder = this.postsRepository.createQueryBuilder('posts');
+    const data = await queryBuilder
+      .leftJoinAndSelect('posts.author', 'users')
+      .where('posts.title like :title', { title: '%' + keyword + '%' })
+      .orderBy('posts.createdAt', 'DESC')
+      .skip(skip)
+      .take(take)
+      .getMany();
+    return data;
   }
 
   findOne(id: number) {

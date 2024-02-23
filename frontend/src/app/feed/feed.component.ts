@@ -3,6 +3,8 @@ import { CreatePostComponent } from '../components/posts/create-post/create-post
 import { RouterOutlet } from '@angular/router';
 import { ListPostComponent } from '../components/posts/list-post/list-post.component';
 import { ProfileComponent } from '../components/profile/profile.component';
+import { PostResults } from '../interfaces/posts.interfaces';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-feed',
@@ -13,6 +15,15 @@ import { ProfileComponent } from '../components/profile/profile.component';
     CreatePostComponent,
     ListPostComponent,
     ProfileComponent,
+    FormsModule,
+    ReactiveFormsModule,
   ],
 })
-export class FeedComponent {}
+export class FeedComponent {
+  newPostEvent: string = '';
+
+  addNewPostEvent(post: PostResults) {
+    console.log('post', post);
+    this.newPostEvent = JSON.stringify(post);
+  }
+}

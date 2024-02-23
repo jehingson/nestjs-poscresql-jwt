@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, EventEmitter, Output } from '@angular/core';
 import {
   AbstractControl,
   FormBuilder,
@@ -9,6 +9,7 @@ import {
   Validators,
 } from '@angular/forms';
 import { PostService } from '../../../core/services/post.service';
+import { PostResults } from '../../../interfaces/posts.interfaces';
 
 @Component({
   selector: 'app-create-post',
@@ -18,6 +19,8 @@ import { PostService } from '../../../core/services/post.service';
   providers: [PostService],
 })
 export class CreatePostComponent {
+  @Output() addNewPostEvent = new EventEmitter<PostResults>();
+
   form: FormGroup = new FormGroup({
     title: new FormControl(''),
     content: new FormControl(''),
@@ -50,7 +53,24 @@ export class CreatePostComponent {
     const { title, content } = this.form.value;
     this.postService.create(title, content).subscribe({
       next: (data) => {
-        console.log('data', data);
+        this.addNewPostEvent.emit({
+          id: data.id,
+          title: data.title,
+          content: data.content,
+          likes: data.likes,
+          createdAt: data.createdAt,
+          author: {
+            id: data.author.id,
+            fullName: data.author.fullName,
+            age: data.author.age,
+            email: data.author.email,
+          },
+        });
+        this.form.reset();
+        this.isLoggedIn = false;
+        this.isLoginFailed = false;
+        this.errorMessage = '';
+        this.submitted = false;
         //
       },
       error: (err) => {

@@ -11,8 +11,8 @@
   </div>
   </div>
   <div class="flex-1 border-2 border-gray-300 rounded-xl relative">
-    <app-create-post />
-    <app-list-post />
+    <app-create-post (addNewPostEvent)="addNewPostEvent($event)" />
+    <app-list-post newPostEvent="{{ newPostEvent }}" />
   </div>
 </section>
 <router-outlet />

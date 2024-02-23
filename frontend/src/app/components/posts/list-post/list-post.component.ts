@@ -1,9 +1,9 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { PostService } from '../../../core/services/post.service';
-import { Observable } from 'rxjs';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
+import { PostResults } from '../../../interfaces/posts.interfaces';
 
 @Component({
   selector: 'app-list-post',
@@ -13,13 +13,27 @@ import { HttpClientModule } from '@angular/common/http';
   providers: [PostService],
 })
 export class ListPostComponent {
-  public postsList$!: Observable<any[]>;
-
+  @Input() newPostEvent: string = '';
+  postsList: PostResults[] = [];
   errorMessage = '';
 
   constructor(private postsService: PostService) {}
 
   ngOnInit(): void {
-    // this.postsList$ = this.postsService.postsAll(10, 0).subscribe();
+    this.postsService.postsAll(10, 0).subscribe({
+      next: (data: PostResults[]) => {
+        this.postsList = data;
+      },
+      error: (err) => {
+        console.log('err', err);
+      },
+    });
+  }
+
+  ngOnChanges() {
+    if (this.newPostEvent) {
+      const post = JSON.parse(this.newPostEvent);
+      this.postsList.unshift(post);
+    }
   }
 }
