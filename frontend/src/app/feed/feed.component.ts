@@ -24,6 +24,8 @@ export class FeedComponent {
 
   addNewPostEvent(post: PostResults) {
     console.log('post', post);
-    this.newPostEvent = JSON.stringify(post);
+    if (post) {
+      this.newPostEvent = JSON.stringify(post);
+    }
   }
 }

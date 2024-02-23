@@ -28,9 +28,8 @@ export class AuthService {
       password: await bcryptjs.hash(password, 10),
     });
     delete newUser.password;
-    const payload = { ...user };
+    const payload = { ...newUser };
     const token = await this.jwtService.signAsync(payload);
-
     return {
       token,
       user: newUser,

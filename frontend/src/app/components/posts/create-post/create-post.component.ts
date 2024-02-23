@@ -53,19 +53,21 @@ export class CreatePostComponent {
     const { title, content } = this.form.value;
     this.postService.create(title, content).subscribe({
       next: (data) => {
-        this.addNewPostEvent.emit({
-          id: data.id,
-          title: data.title,
-          content: data.content,
-          likes: data.likes,
-          createdAt: data.createdAt,
-          author: {
-            id: data.author.id,
-            fullName: data.author.fullName,
-            age: data.author.age,
-            email: data.author.email,
-          },
-        });
+        if (data) {
+          this.addNewPostEvent.emit({
+            id: data.id,
+            title: data.title,
+            content: data.content,
+            likes: data.likes,
+            createdAt: data.createdAt,
+            author: {
+              id: data.author.id,
+              fullName: data.author.fullName,
+              age: data.author.age,
+              email: data.author.email,
+            },
+          });
+        }
         this.form.reset();
         this.isLoggedIn = false;
         this.isLoginFailed = false;
