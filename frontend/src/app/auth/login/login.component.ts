@@ -8,6 +8,7 @@ import {
   ReactiveFormsModule,
   Validators,
 } from '@angular/forms';
+import { RouterOutlet } from '@angular/router';
 import { HttpClientModule } from '@angular/common/http';
 import { AuthService } from '../../core/services/auth.service';
 import { StorageService } from '../../core/services/storage.service';
@@ -15,7 +16,7 @@ import { StorageService } from '../../core/services/storage.service';
 @Component({
   selector: 'app-login',
   standalone: true,
-  imports: [FormsModule, ReactiveFormsModule, HttpClientModule],
+  imports: [FormsModule, ReactiveFormsModule, HttpClientModule, RouterOutlet],
   templateUrl: './login.component.html',
   providers: [AuthService, StorageService],
 })

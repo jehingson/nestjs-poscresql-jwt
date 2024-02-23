@@ -12,11 +12,12 @@ import { HttpClientModule } from '@angular/common/http';
 import { AuthService } from '../../core/services/auth.service';
 import { StorageService } from '../../core/services/storage.service';
 import Validation from '../../shared/utils/validation';
+import { RouterOutlet } from '@angular/router';
 
 @Component({
   selector: 'app-register',
   standalone: true,
-  imports: [FormsModule, ReactiveFormsModule, HttpClientModule],
+  imports: [FormsModule, ReactiveFormsModule, HttpClientModule, RouterOutlet],
   templateUrl: './register.component.html',
   providers: [AuthService, StorageService],
 })
@@ -43,15 +44,8 @@ export class RegisterComponent {
   ngOnInit(): void {
     this.form = this.formBuilder.group(
       {
-        fullname: ['', Validators.required],
-        username: [
-          '',
-          [
-            Validators.required,
-            Validators.minLength(6),
-            Validators.maxLength(20),
-          ],
-        ],
+        fullName: ['', Validators.required],
+        age: ['', [Validators.required]],
         email: ['', [Validators.required, Validators.email]],
         password: [
           '',
@@ -62,7 +56,6 @@ export class RegisterComponent {
           ],
         ],
         confirmPassword: ['', Validators.required],
-        acceptTerms: [false, Validators.requiredTrue],
       },
       {
         validators: [Validation.match('password', 'confirmPassword')],

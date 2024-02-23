@@ -1,1 +1,126 @@
-<p>register works!</p>
+<main class="w-full h-screen flex justify-center items-center">
+  <div
+    class="shadow-xl p-4 sm:p-10 w-full max-w-[550px] border-2 border-gray-50 rounded-xl bg-slate-50"
+  >
+    <h1 class="text-5xl font-bold text-center py-5 text-blue-600">XyZ</h1>
+
+    <form [formGroup]="form" (submit)="onSubmit()" class="text-lg">
+      <div class="flex flex-col mt-4">
+        <label>Nombre y Apellido</label>
+        <input
+          type="text"
+          formControlName="fullName"
+          class="px-5 py-2 rounded-md border-2 border-gray-600"
+          required
+        />
+        @if (submitted && f['fullName'].errors) {
+          <div class="text-red-400">
+            @if (f['fullName'].errors['required']) {
+              <p>fullName is required</p>
+            }
+          </div>
+        }
+      </div>
+
+      <div class="flex flex-col mt-4">
+        <label>Edad</label>
+        <input
+          type="number"
+          formControlName="age"
+          class="px-5 py-2 rounded-md border-2 border-gray-600"
+          required
+        />
+        @if (submitted && f['age'].errors) {
+          <div class="text-red-400">
+            @if (f['age'].errors['required']) {
+              <p>Edad is required</p>
+            }
+          </div>
+        }
+      </div>
+
+      <div class="flex flex-col mt-4">
+        <label>Email</label>
+        <input
+          type="email"
+          formControlName="email"
+          name="name"
+          class="px-5 py-2 rounded-md border-2 border-gray-600"
+          required
+        />
+        @if (submitted && f['email'].errors) {
+          <div class="text-red-400">
+            @if (f['email'].errors['required']) {
+              <p>Email is required</p>
+            }
+            @if (f['email'].errors['email']) {
+              <p>Email is invalid</p>
+            }
+          </div>
+        }
+      </div>
+
+      <div class="flex flex-col mt-4">
+        <label>Password</label>
+        <input
+          type="password"
+          formControlName="password"
+          name="password"
+          class="px-5 py-2 rounded-md border-2 border-gray-600"
+          required
+          minlength="6"
+        />
+        @if (submitted && f['password'].errors) {
+          <div class="text-red-400">
+            @if (f['password'].errors['required']) {
+              <div>Password is required</div>
+            }
+            @if (f['password'].errors['minlength']) {
+              <div>Password must be at least 6 characters</div>
+            }
+            @if (f['password'].errors['maxlength']) {
+              <div>Username must not exceed 40 characters</div>
+            }
+          </div>
+        }
+      </div>
+
+      <div class="flex flex-col mt-4">
+        <label>Confirmar Password</label>
+        <input
+          type="password"
+          formControlName="confirmPassword"
+          class="px-5 py-2 rounded-md border-2 border-gray-600"
+          required
+          minlength="6"
+        />
+        @if (submitted && f['confirmPassword'].errors) {
+          <div class="text-red-400">
+            @if (f['confirmPassword'].errors['required']) {
+              <div>Confirm Password is required</div>
+            }
+            @if (f['confirmPassword'].errors['matching']) {
+              <div>Confirm Password does not match</div>
+            }
+    
+          </div>
+        }
+      </div>
+
+      <div class="mt-4">
+        <button
+          type="submit"
+          class="w-full rounded-lg py-3 mt-4 bg-blue-500 hover:bg-blue-600 active:bg-blue-700 text-white font-bold focus:border-transparent"
+        >
+          Registrar
+        </button>
+      </div>
+    </form>
+    <div class="mt-5 flex justify-end">
+      <a href="/login" class="text-blue-500 cursor-pointer hover:text-blue-600"
+        >¿Quieres iniciar sesión? ¡Haz clic aquí!</a
+      >
+    </div>
+  </div>
+</main>
+<router-outlet></router-outlet>
