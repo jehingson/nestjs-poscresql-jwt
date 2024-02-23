@@ -18,8 +18,8 @@ Este proyecto tiene como objetivo proporcionar una guía paso a paso para inicia
 4. Ejecuta `docker compose up` para iniciacilizar la instancia de PostgreSQL
 
 ## Uso Local
-1. Ejecuta `yarn start:dev` para inicializar la aplicacion en local
-2. Los enpoind del api `http://localhost:3000/api/v1`.
+1. Ejecuta `yarn dev` para inicializar la aplicacion en local
+2. Abre el navegador `http://localhost:4200`.
 
 # Uso Produccion
 2. El Api se encuentra activo en produccion en la siguiente url `https://nestjs-poscresql-jwt.onrender.com/api/v1`
