@@ -23,4 +23,10 @@ export class AuthController {
   profile(@Request() req) {
     return req.user;
   }
+
+  @Post('logout')
+  // @Auth()
+  logout() {
+    return { msg: 'The user session has ended' };
+  }
 }

@@ -30,7 +30,6 @@ export class AuthService {
   }
   async login({ email, password }: LoginDto) {
     const user = await this.usersService.findOneByEmailWithPassword(email);
-
     if (!user) {
       throw new UnauthorizedException('Invalid credentials');
     }
@@ -46,7 +45,7 @@ export class AuthService {
 
     return {
       token,
-      email,
+      user,
     };
   }
 }
