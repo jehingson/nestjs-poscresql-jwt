@@ -1,3 +1,12 @@
-
-
-<p class="h-32">ks!</p>
+<section
+  class="min-h-screen flex flex-col md:flex-row relative pt-20 max-w-6xl mx-auto gap-1"
+>
+  <div
+    class="w-full md:w-1/3 relative md:min-h-screen bg-slate-50 border-2 border-gray-300 rounded-xl"
+  ></div>
+  <div class="flex-1 min-h-screen border-2 border-gray-300 rounded-xl">
+    <app-create-post />
+    <app-list-post />
+  </div>
+</section>
+<router-outlet />

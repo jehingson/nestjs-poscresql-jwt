@@ -21,13 +21,22 @@ export class AuthService {
     if (user) {
       throw new BadRequestException('User already exists');
     }
-    return await this.usersService.create({
+    const newUser = await this.usersService.create({
       fullName,
       email,
       age,
       password: await bcryptjs.hash(password, 10),
     });
+    delete newUser.password;
+    const payload = { ...user };
+    const token = await this.jwtService.signAsync(payload);
+
+    return {
+      token,
+      user: newUser,
+    };
   }
+
   async login({ email, password }: LoginDto) {
     const user = await this.usersService.findOneByEmailWithPassword(email);
     if (!user) {

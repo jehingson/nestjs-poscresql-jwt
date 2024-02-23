@@ -60,7 +60,6 @@ export class LoginComponent {
     const { email, password } = this.form.value;
     this.authService.login(email, password).subscribe({
       next: (data) => {
-        console.log('data', data);
         this.storageService.saveUser(data);
         this.isLoginFailed = false;
         this.isLoggedIn = true;
@@ -76,10 +75,5 @@ export class LoginComponent {
 
   reloadPage(): void {
     window.location.reload();
-  }
-
-  onReset(): void {
-    this.submitted = false;
-    this.form.reset();
   }
 }

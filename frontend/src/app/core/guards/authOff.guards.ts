@@ -5,7 +5,7 @@ import { StorageService } from '../services/storage.service';
 @Injectable({
   providedIn: 'root',
 })
-export class AuthGuard implements CanActivate {
+export class AuthGuardOff implements CanActivate {
   constructor(
     private router: Router,
     private storageService: StorageService,
@@ -13,10 +13,9 @@ export class AuthGuard implements CanActivate {
 
   canActivate(): boolean {
     const storage = this.storageService.getUser();
-    console.log('storage', storage);
     const token = storage?.token ?? null;
-    if (!token) {
-      this.router.navigate(['/login']);
+    if (token) {
+      this.router.navigate(['/feed']);
     }
     return true;
   }

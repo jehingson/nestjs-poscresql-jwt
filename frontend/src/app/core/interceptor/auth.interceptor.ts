@@ -24,18 +24,19 @@ export class TokenInterceptor implements HttpInterceptor {
     request: HttpRequest<unknown>,
     next: HttpHandler,
   ): Observable<HttpEvent<unknown>> {
-    if (request.context.get(CHECK_TOKEN)) {
-      return this.addToken(request, next);
-    }
-    return next.handle(request);
+    // if (request.context.get(CHECK_TOKEN)) {
+    //   return this.addToken(request, next);
+    // }
+    return this.addToken(request, next);
   }
 
   private addToken(request: HttpRequest<unknown>, next: HttpHandler) {
     const storage = this.storageService.getUser();
+    console.log('storage', storage);
     const accessToken = storage?.token ?? null;
     if (accessToken) {
       const authRequest = request.clone({
-        headers: request.headers.set('authorization', `Bearer ${accessToken}`),
+        headers: request.headers.set('Authorization', `Bearer ${accessToken}`),
       });
       return next.handle(authRequest);
     }

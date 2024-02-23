@@ -1,0 +1,15 @@
+<div class="px-5 mt-5">
+  <h2>Publicaciones recientes</h2>
+  @if (postsList$ | async; as resultObject) {
+    <div class="w-full">
+      @for (item of postsList$ | async; track item.id) {
+        <div class="border-2 border-gray-300 mt-2 bg-slate-50 p-2 rounded-md">
+          <div>
+            <h3 class="text-xl">{{ item.title }}</h3>
+            <p class="mt-2">{{ item.content }}</p>
+          </div>
+        </div>
+      }
+    </div>
+  }
+</div>

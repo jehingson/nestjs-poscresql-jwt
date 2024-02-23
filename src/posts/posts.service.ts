@@ -20,7 +20,7 @@ export class PostsService {
   }
 
   findAll(take: number = 10, skip: number = 0) {
-    return this.postsRepository.findAndCount({ take, skip });
+    return this.postsRepository.find({ take, skip });
   }
 
   findOne(id: number) {
