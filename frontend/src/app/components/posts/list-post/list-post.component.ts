@@ -4,6 +4,7 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { PostResults } from '../../../interfaces/posts.interfaces';
+import { parseFromNow } from '../../../shared/utils/parseFromNow';
 
 @Component({
   selector: 'app-list-post',
@@ -35,5 +36,9 @@ export class ListPostComponent {
       const post = JSON.parse(this.newPostEvent);
       this.postsList.unshift(post);
     }
+  }
+
+  parseFormat(date: Date) {
+    return parseFromNow(date);
   }
 }
