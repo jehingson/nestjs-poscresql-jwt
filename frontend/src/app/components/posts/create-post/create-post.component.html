@@ -1,14 +1,55 @@
-<div class="w-full relative bg-green-100 px-5 py-2">
+<div class="w-full relative px-5 py-2">
   <div class="">
-    <h1>Crear una publicacione</h1>
-    <form class="p-4">
-      <div class="flex flex-col mt-2">
-        <label>Titulo</label>
-        <input type="text" formControlName="title" required />
+    <h1>Crear una publicacion</h1>
+    <form
+      [formGroup]="form"
+      (submit)="onSubmit()"
+      class="p-4 px-4 py-y bg-white shadow-md rounded-md flex gap-5 items-start"
+    >
+      <div>
+        <img src="/assets/usuario2.png" alt="user" width="40" height="40" />
       </div>
-      <div class="flex flex-col mt-2">
-        <label>Contenido</label>
-        <input type="text" formControlName="title" required />
+      <div class="w-full">
+        <div class="flex flex-col">
+          <label>Título</label>
+          <input
+            type="text"
+            formControlName="title"
+            required
+            placeholder="Título"
+            class="px-5 py-2 rounded-3xl border-2 border-gray-600"
+          />
+          @if (submitted && f['title'].errors) {
+            <div class="text-red-400">
+              @if (f['title'].errors['required']) {
+                <p>title is required</p>
+              }
+            </div>
+          }
+        </div>
+        <div class="flex flex-col mt-2">
+          <label>Contenido</label>
+          <input
+            type="text"
+            formControlName="title"
+            required
+            placeholder="Contenido de publicacion"
+            class="px-5 py-5 rounded-3xl border-2 border-gray-600"
+          />
+          @if (submitted && f['content'].errors) {
+            <div class="text-red-400">
+              @if (f['content'].errors['required']) {
+                <p>content is required</p>
+              }
+            </div>
+          }
+        </div>
+        <div class="mt-1 flex justify-end">
+          <button
+            type="submit"
+            class="rounded-2xl py-2 px-5 mt-4 bg-blue-500 hover:bg-blue-600 active:bg-blue-700 text-white font-bold focus:border-transparent"
+          >Guardar publicacion</button>
+        </div>
       </div>
     </form>
   </div>
